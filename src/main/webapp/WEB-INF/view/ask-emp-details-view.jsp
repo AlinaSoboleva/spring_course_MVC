@@ -16,6 +16,13 @@
     <form:errors path="surname"/>
     <br><br>
     Salary <from:input path="salary"/>
+    <form:errors path="salary"/>
+    <br><br>
+    Phone number <from:input path="phoneNumber"/>
+    <form:errors path="phoneNumber"/>
+    <br><br>
+    Email <from:input path="email"/>
+    <form:errors path="email"/>
     <br><br>
     Department <form:select path="department">
     <form:options items="${employee.departments}"/>
