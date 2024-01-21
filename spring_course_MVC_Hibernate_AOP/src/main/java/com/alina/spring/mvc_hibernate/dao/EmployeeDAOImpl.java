@@ -1,5 +1,6 @@
 package com.alina.spring.mvc_hibernate.dao;
 
+import com.alina.spring.mvc_hibernate.aspect.RepositoryLog;
 import com.alina.spring.mvc_hibernate.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @RepositoryLog
     @Override
     public List<Employee> getAllEmployees() {
         Session session = sessionFactory.getCurrentSession();
@@ -24,6 +26,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return allEmployees;
     }
 
+    @RepositoryLog
     @Override
     public void saveEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
@@ -31,6 +34,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         session.saveOrUpdate(employee);
     }
 
+    @RepositoryLog
     @Override
     public Employee getEmployee(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -38,6 +42,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employee;
     }
 
+    @RepositoryLog
     @Override
     public void deleteEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
