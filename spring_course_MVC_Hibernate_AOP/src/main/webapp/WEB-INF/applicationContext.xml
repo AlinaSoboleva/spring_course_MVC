@@ -28,6 +28,7 @@
           destroy-method="close">
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/my_db?useSSL=false" />
+<!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/my_db?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'" />-->
         <property name="user" value="bestuser" />
         <property name="password" value="bestuser" />
     </bean>
