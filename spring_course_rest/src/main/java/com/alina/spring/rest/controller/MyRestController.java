@@ -3,9 +3,7 @@ package com.alina.spring.rest.controller;
 import com.alina.spring.rest.entity.Employee;
 import com.alina.spring.rest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,10 @@ public class MyRestController {
     @GetMapping("/employee")
     public List<Employee> showAllEmployees(){
         return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/employee/{id}")
+    public Employee getById(@PathVariable int id){
+        return employeeService.getEmployee(id);
     }
 }
