@@ -2,6 +2,7 @@ package com.alina.spring.rest.service;
 
 import com.alina.spring.rest.dao.EmployeeDAO;
 import com.alina.spring.rest.entity.Employee;
+import com.alina.spring.rest.exception.NoSuchEmployeeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public Employee getEmployee(int id) {
-        return employeeDAO.getEmployee(id);
+        Employee employee =  employeeDAO.getEmployee(id);
+        if (employee == null){
+            throw new NoSuchEmployeeException("There is no employee with ID = " +
+                    id + " int Database");
+        }
+        return employee;
     }
 
     @Override
