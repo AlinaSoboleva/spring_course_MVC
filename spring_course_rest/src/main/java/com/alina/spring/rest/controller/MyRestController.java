@@ -27,4 +27,10 @@ public class MyRestController {
     public Employee getById(@PathVariable int id){
         return employeeService.getEmployee(id);
     }
+
+    @PostMapping("/employee")
+    public Employee addNewEmployee(@RequestBody Employee employee){
+        employeeService.saveEmployee(employee);
+        return employee;
+    }
 }
