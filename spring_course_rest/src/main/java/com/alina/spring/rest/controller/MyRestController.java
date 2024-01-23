@@ -33,4 +33,16 @@ public class MyRestController {
         employeeService.saveEmployee(employee);
         return employee;
     }
+
+    @PutMapping("/employee")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        employeeService.saveEmployee(employee);
+        return employee;
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public String deleteEmployee(@PathVariable int id){
+        employeeService.deleteEmployee(id);
+        return new String("Employee with id " + id + " deleted");
+    }
 }

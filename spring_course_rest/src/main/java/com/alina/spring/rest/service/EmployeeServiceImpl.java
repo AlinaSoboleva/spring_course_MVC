@@ -41,6 +41,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public void deleteEmployee(int id) {
         Employee employee = employeeDAO.getEmployee(id);
+        if (employee == null) throw new NoSuchEmployeeException("There is no employee with ID = " +
+                id + " int Database");
         employeeDAO.deleteEmployee(employee);
 
     }
