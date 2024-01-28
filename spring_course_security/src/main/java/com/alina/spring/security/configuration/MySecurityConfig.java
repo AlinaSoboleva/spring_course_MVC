@@ -1,6 +1,7 @@
 package com.alina.spring.security.configuration;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +16,25 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser(userBuilder.username("alina").password("alina").roles("EMPLOYEE"))
                 .withUser(userBuilder.username("elena").password("elena").roles("HR"))
-                .withUser(userBuilder.username("katya").password("katya").roles("EMPLOYEE", "HR"));
+                .withUser(userBuilder.username("katya").password("katya").roles("MANAGER", "HR"));
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests((authorizeRequest) ->
+                {
+                    try {
+                        authorizeRequest.antMatchers("/").hasAnyRole("MANAGER", "EMPLOYEE", "HR") //что бы эту страницу видели все роли
+                        .antMatchers("/hr_info").hasRole("HR")
+                        .antMatchers("/manager_info").hasRole("MANAGER")
+                                .and().formLogin().permitAll();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .exceptionHandling((exceptionHandling) ->
+                        exceptionHandling.accessDeniedPage("/errors"));
+
+        //форма логина и пароля запрашивается у всех
     }
 }

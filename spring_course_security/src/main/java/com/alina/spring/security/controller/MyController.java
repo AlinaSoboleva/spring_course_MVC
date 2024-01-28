@@ -20,4 +20,9 @@ public class MyController {
     public String getInfoOnlyForManager(){
         return "view_for_manager";
     }
+
+    @GetMapping("/errors")
+    public String getError(){
+        return "view_error";
+    }
 }
